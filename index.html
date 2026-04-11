@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="styles.css" />
+    <title>Security Dashboard</title>
+  </head>
+  <body>
+    <h1>Security Dashboard</h1>
+    <div id="password-strength-wrapper">
+      <input
+        type="text"
+        id="password-input"
+        placeholder="Test Password Security.."
+        required
+      />
+      <dialog id="modal">Password cannot be blank.</dialog>
+      <button id="check-password">Check Password</button>
+      <button id="clear-password-input">Clear Input</button>
+      <p id="password-strength-result">Please enter a password.</p>
+      <h3>Issues:</h3>
+      <ul id="password-issues-list"></ul>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
