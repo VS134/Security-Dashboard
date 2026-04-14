@@ -7,17 +7,320 @@
 }
 
 body {
-  background-color: beige;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
   min-height: 100dvh;
+  font-family: 'Courier New', monospace;
+  color: #00ff88;
 }
+
 h1 {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 40px;
+  font-size: 2.5em;
+  text-shadow:
+    0 0 20px #00ff88,
+    0 0 40px #00ffff;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
 }
-#password-strength-wrapper {
+
+h2 {
+  color: #00ffcc;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+}
+
+/* Container styling */
+.tools-container {
   display: flex;
   flex-direction: column;
+  gap: 30px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Tool wrapper styling */
+#password-strength-wrapper,
+#hash-generator-wrapper {
+  background: rgba(10, 14, 39, 0.8);
+  border: 2px solid #00ff88;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow:
+    0 0 20px rgba(0, 255, 136, 0.3),
+    inset 0 0 20px rgba(0, 255, 136, 0.05);
+  transition: all 0.3s ease;
+}
+
+#password-strength-wrapper:hover,
+#hash-generator-wrapper:hover {
+  box-shadow:
+    0 0 30px rgba(0, 255, 136, 0.5),
+    inset 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+/* Input styling */
+input[type='text'],
+input[type='password'] {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 15px;
+  background: rgba(0, 255, 136, 0.05);
+  border: 1.5px solid #00ff88;
+  color: #00ff88;
+  border-radius: 5px;
+  font-family: 'Courier New', monospace;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+input[type='text']::placeholder,
+input[type='password']::placeholder {
+  color: rgba(0, 255, 136, 0.5);
+}
+
+input[type='text']:focus,
+input[type='password']:focus {
+  outline: none;
+  box-shadow:
+    0 0 15px rgba(0, 255, 136, 0.6),
+    inset 0 0 10px rgba(0, 255, 136, 0.1);
+  border-color: #00ffff;
+}
+
+/* Button styling */
+button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #00ff88 0%, #00ffcc 100%);
+  border: none;
+  border-radius: 5px;
+  color: #0a0e27;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 10px;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 255, 136, 0.2);
+}
+
+/* Password strength result */
+#password-strength-result {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 15px 0;
+  padding: 10px;
+  border-left: 3px solid #00ff88;
+  padding-left: 15px;
+  color: #ff0055;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Issues list */
+h3 {
+  color: #00ffcc;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+}
+
+#password-issues-list {
+  list-style: none;
+  background: rgba(0, 255, 136, 0.05);
+  border-left: 2px solid #ff0055;
+  border-radius: 3px;
+  padding: 15px 20px;
+}
+
+#password-issues-list li {
+  padding: 8px 0;
+  color: #ff6b9d;
+  font-size: 0.95em;
+  border-bottom: 1px solid rgba(255, 107, 157, 0.2);
+}
+
+#password-issues-list li:last-child {
+  border-bottom: none;
+}
+
+/* Hash output styling */
+#hash-output {
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid #00ff88;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px 0;
+  font-size: 0.85em;
+  word-break: break-all;
+  color: #00ffff;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.hash-output-subtitle {
+  color: #666;
+  font-size: 0.85em;
+  margin-bottom: 10px;
+}
+
+.clear-button-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+/* Linux Permissions Calculator */
+.linux-permissions-calc {
+  background: rgba(10, 14, 39, 0.8);
+  border: 2px solid #00ff88;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow:
+    0 0 20px rgba(0, 255, 136, 0.3),
+    inset 0 0 20px rgba(0, 255, 136, 0.05);
+  transition: all 0.3s ease;
+}
+
+.linux-permissions-calc:hover {
+  box-shadow:
+    0 0 30px rgba(0, 255, 136, 0.5),
+    inset 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.linux-permissions-calc h2 {
+  margin-bottom: 25px;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: rgba(0, 255, 136, 0.03);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+thead {
+  background: rgba(0, 255, 204, 0.1);
+  border-bottom: 2px solid #00ffcc;
+}
+
+thead th {
+  color: #00ffcc;
+  padding: 12px 15px;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85em;
+  text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+}
+
+tbody th {
+  color: #00ff88;
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: bold;
+  background: rgba(0, 255, 136, 0.05);
+  border-right: 1px solid rgba(0, 255, 136, 0.2);
+  text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+}
+
+tbody tr {
+  border-bottom: 1px solid rgba(0, 255, 136, 0.15);
+}
+
+tbody tr:hover {
+  background: rgba(0, 255, 136, 0.08);
+}
+
+tbody td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+/* Checkbox styling */
+input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(0, 255, 136, 0.05);
+  border: 2px solid #00ff88;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+input[type='checkbox']:hover {
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+  border-color: #00ffff;
+}
+
+input[type='checkbox']:checked {
+  background: linear-gradient(135deg, #00ff88 0%, #00ffcc 100%);
+  border-color: #00ffff;
+  box-shadow:
+    0 0 15px rgba(0, 255, 136, 0.8),
+    inset 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+input[type='checkbox']:checked::after {
+  content: '✓';
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  color: #0a0e27;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Output styling */
+#permissions-calc-octal-output,
+#permissions-calc-command-output {
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid #00ff88;
+  border-radius: 5px;
+  padding: 12px 15px;
+  margin: 12px 0;
+  color: #00ffff;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+  word-break: break-word;
+}
+
+#permissions-calc-octal-output {
+  margin-bottom: 15px;
+  border-left: 3px solid #00ffcc;
+}
+
+#permissions-calc-command-output {
+  border-left: 3px solid #ff0055;
+  color: #ff8400;
+}
+
+/* Reset button for permissions calc*/
+.clear-button {
+  margin-top: 10px;
 }

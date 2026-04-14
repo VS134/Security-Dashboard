@@ -8,21 +8,148 @@
     <title>Security Dashboard</title>
   </head>
   <body>
-    <h1>Security Dashboard</h1>
-    <div id="password-strength-wrapper">
-      <input
-        type="text"
-        id="password-input"
-        placeholder="Test Password Security.."
-        required
-      />
-      <dialog id="modal">Password cannot be blank.</dialog>
-      <button id="check-password">Check Password</button>
-      <button id="clear-password-input">Clear Input</button>
-      <p id="password-strength-result">Please enter a password.</p>
-      <h3>Issues:</h3>
-      <ul id="password-issues-list"></ul>
-    </div>
+    <h1>> SECURITY DASHBOARD</h1>
+    <main class="tools-container">
+      <div id="password-strength-wrapper">
+        <h2>/// PASSWORD STRENGTH ANALYZER</h2>
+        <input
+          type="text"
+          id="password-input"
+          placeholder="Enter password to analyze..."
+          required
+        />
+
+        <div class="clear-button-wrapper">
+          <button id="clear-password-input" class="clear-button">Clear</button>
+        </div>
+        <p id="password-strength-result">Please enter a password.</p>
+        <h3>/// Issues Detected:</h3>
+        <ul id="password-issues-list"></ul>
+      </div>
+
+      <div id="hash-generator-wrapper">
+        <h2>/// SHA-256 HASH GENERATOR</h2>
+        <input
+          type="text"
+          id="user-input"
+          placeholder="Enter text to hash..."
+        />
+        <div class="hash-output-subtitle">Real-time SHA-256 hashing</div>
+        <p id="hash-output"></p>
+        <button id="reset-hash-generator" class="clear-button">Clear</button>
+      </div>
+
+      <div class="linux-permissions-calc">
+        <h2>/// LINUX PERMISSIONS VISUALIZER</h2>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Read</th>
+              <th>Write</th>
+              <th>Execute</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Owner</th>
+              <td>
+                <input
+                  type="checkbox"
+                  name="owner-read"
+                  data-class="owner"
+                  data-value="4"
+                  class="perm"
+                />
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  name="owner-write"
+                  data-class="owner"
+                  data-value="2"
+                  class="perm"
+                />
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  name="owner-execute"
+                  data-class="owner"
+                  data-value="1"
+                  class="perm"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Group</th>
+              <td>
+                <input
+                  type="checkbox"
+                  name="group-read"
+                  data-class="group"
+                  data-value="4"
+                  class="perm"
+                />
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  name="group-write"
+                  data-class="group"
+                  data-value="2"
+                  class="perm"
+                />
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  name="group-execute"
+                  data-class="group"
+                  data-value="1"
+                  class="perm"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Public</th>
+              <td>
+                <input
+                  type="checkbox"
+                  name="public-read"
+                  data-class="public"
+                  data-value="4"
+                  class="perm"
+                />
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  name="public-write"
+                  data-class="public"
+                  data-value="2"
+                  class="perm"
+                />
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  name="public-execute"
+                  data-class="public"
+                  data-value="1"
+                  class="perm"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p id="permissions-calc-octal-output">0000 / ----------</p>
+        <p id="permissions-calc-command-output">
+          The command you need to type is:
+        </p>
+        <button id="reset-permissions" class="clear-button">Clear</button>
+      </div>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>
