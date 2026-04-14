@@ -79,7 +79,7 @@ password.addEventListener('input', () => {
 
   if (missingCriteria.length === 0) {
     const listItem = document.createElement('li');
-    listItem.textContent = 'Your password is very strong. Great job!';
+    listItem.textContent = 'No issues detected.';
     listItem.style.color = '#00ff88';
     passwordIssuesList.appendChild(listItem);
     return;
