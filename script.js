@@ -10,6 +10,46 @@ const passwordStrengthResult = document.getElementById(
 const clearInputButton = document.getElementById('clear-password-input');
 const passwordIssuesList = document.getElementById('password-issues-list');
 
+function detectCommonPatterns(password) {
+  const commonPatterns = [
+    'password',
+    'qwerty',
+    'abc',
+    '123',
+    '123456',
+    '12345',
+    'letmein',
+    'welcome',
+    'admin',
+    'login',
+    'pass',
+    'test',
+  ];
+  const passwordLower = password.toLowerCase();
+  const issues = [];
+  let entropyPenalty = 0;
+
+  // Check for common patterns as substrings
+  for (const pattern of commonPatterns) {
+    if (passwordLower.includes(pattern)) {
+      issues.push(`Contains common pattern: "${pattern}"`);
+      entropyPenalty += 60;
+      break;
+    }
+  }
+
+  // Check for repeated characters (3+ in a row)
+  for (const char of 'abcdefghijklmnopqrstuvwxyz0123456789') {
+    if (passwordLower.includes(char.repeat(3))) {
+      issues.push('Contains too many repeated characters.');
+      entropyPenalty += 50;
+      break;
+    }
+  }
+
+  return { issues, entropyPenalty };
+}
+
 function calculatePasswordEntropy(charSetSize, passwordLength) {
   return Math.log2(charSetSize) * passwordLength;
 }
@@ -52,11 +92,19 @@ function calculatePasswordStrength(password) {
     charSet += 32; // Assuming 32 special characters
   } else missingCriteria.push('at least one special character');
 
-  const entropy = calculatePasswordEntropy(charSet, password.length);
+  let entropy = calculatePasswordEntropy(charSet, password.length);
+
+  // Apply penalty for common patterns and repeated characters
+  const patternAnalysis = detectCommonPatterns(password);
+  entropy = Math.max(entropy - patternAnalysis.entropyPenalty, 0);
+
+  // Merge pattern issues with missing criteria
+  const allIssues = [...patternAnalysis.issues, ...missingCriteria];
+
   const passwordStrength = entropyToStrength(entropy);
   return {
     passwordStrength,
-    missingCriteria,
+    missingCriteria: allIssues,
   };
 }
 
@@ -73,20 +121,23 @@ password.addEventListener('input', () => {
   passwordStrengthResult.textContent = `Password Strength: ${strength.strength}`;
   passwordStrengthResult.style.color = strength.color;
   passwordIssuesList.replaceChildren();
-  const missingCriteria = calculatePasswordStrength(
-    password.value,
-  ).missingCriteria;
+  const allIssues = calculatePasswordStrength(password.value).missingCriteria;
 
-  if (missingCriteria.length === 0) {
+  if (allIssues.length === 0) {
     const listItem = document.createElement('li');
     listItem.textContent = 'No issues detected.';
     listItem.style.color = '#00ff88';
     passwordIssuesList.appendChild(listItem);
     return;
   } else {
-    missingCriteria.forEach((criterion) => {
+    allIssues.forEach((issue) => {
       const listItem = document.createElement('li');
-      listItem.textContent = `To strengthen your password consider adding ${criterion}.`;
+      if (issue.includes('Contains') || issue.includes('repeated')) {
+        listItem.textContent = issue;
+        listItem.style.color = '#ff6b9d';
+      } else {
+        listItem.textContent = `To strengthen your password consider adding ${issue}.`;
+      }
       passwordIssuesList.appendChild(listItem);
     });
   }
